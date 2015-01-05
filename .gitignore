@@ -1,0 +1,4 @@
+bower_components/
+*.sw*
+node_module
+node_modules
