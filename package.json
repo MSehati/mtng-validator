@@ -1,0 +1,35 @@
+{
+  "name": "mtng-validator",
+  "version": "0.0.1",
+  "description": "A convenient validaotr module for angular",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mory0tiki/mtng-validator"
+  },
+  "keywords": [
+    "validator",
+    "ng-validator",
+    "angularjs",
+    "angular",
+    "validation",
+    "angular",
+    "validation"
+  ],
+  "author": "Morteza Tavanarad <tavanarad@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mory0tiki/mtng-validator/issues"
+  },
+  "homepage": "https://github.com/mory0tiki/mtng-validator",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-jshint": "~0.5.2",
+    "grunt-contrib-uglify": "~0.2.0"
+  }
+}
