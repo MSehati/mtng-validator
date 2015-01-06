@@ -245,7 +245,6 @@
          * @memberOf mtng.validator.directives.mtngValidator
          */
         function link(scope, element, attrs, ngModel){
-            scope.ctrl1_form.$invalid = true;
             // get the controller of the element
             var ctl = element.controller();
             if (! ctl.rules){
@@ -312,9 +311,9 @@
                         ngModel.$validators[key] = provider[key];
 
                     if('failedMessage' in value)
-                        provider.messages[key + '_failed'] = value['failedMessage'];
+                        provider.messages[key + '_failed'] = value['failedMessage'].format(value[key]);
                     else if(key in MTNGMessageProvider)
-                        provider.messages[key + '_failed'] = MTNGMessageProvider[key];
+                        provider.messages[key + '_failed'] = MTNGMessageProvider[key].format(value[key]);
                     else
                         provider.messages[key + '_failed'] = MTNGMessageProvider.notValid;
 
@@ -329,7 +328,7 @@
                         provider.addRule(key, value);
                         
                         if(key in MTNGMessageProvider)
-                            provider.messages[key + '_failed'] = MTNGMessageProvider[key];
+                            provider.messages[key + '_failed'] = MTNGMessageProvider[key].format(value);
                         else
                             provider.messages[key + '_failed'] = MTNGMessageProvider.notValid;
 
