@@ -8,6 +8,7 @@
         <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
         <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="../bower_components/mtjs-string-format/mtjs-string-format.js"></script>
         <!-- <script type="text/javascript" src="../mtng.validator.module.js"></script>
         <script type="text/javascript" src="../services/validators.service.js"></script>
         <script type="text/javascript" src="../services/message.service.js"></script>
@@ -49,7 +50,8 @@
                             minLength: 3,
                             failedMessage: "این فیدل باید حداقل ۳ کاراکتر باشد",
                         },
-                        maxLength:{ 
+                        maxLength:{
+                            maxLength: 5,
                             customValidator: function(value){ if(value) return value.length > 5;}
                         }
                     }
