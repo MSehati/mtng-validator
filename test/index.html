@@ -3,8 +3,11 @@
     <head>
         <title>MTNG Validator</title>
 
+        <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+
         <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <!-- <script type="text/javascript" src="../mtng.validator.module.js"></script>
         <script type="text/javascript" src="../services/validators.service.js"></script>
         <script type="text/javascript" src="../services/message.service.js"></script>
@@ -13,22 +16,23 @@
 
     </head>
     <body ng-controller="ctrl1 as vm">
-        <form id="my-form" name="my-form" ng-submit="vm.submit()">
-            <input name="ctrl1__name" id="ctrl1__name" ng-model="vm.name" mtng-validator />
-            <button type="submit">Submit</button>
-        </form>
-
+        <div class="container-fluid">
+            <form name="ctrl1_form" novalidate ng-submit="vm.submit()">
+                <input name="ctrl1__name" id="ctrl1__name" ng-model="vm.name" mtng-validator required />
+                <button type="submit" class="button radius" ng-disabled="typeof(ctrl1_form.$invalid) == 'undefined' ? true : ctrl1_form.$invalid " disabled="disabled">Submit</button>
+                {{ctrl1_form.$invalid}} --- xxxx
+            </form>
+        </div>
         <script>
             angular
-                .module('app', ['mtng.validator'])
-                .controller('ctrl1', ctrl1);
+            .module('app', ['mtng.validator'])
+            .controller('ctrl1', ctrl1);
 
             ctrl1.$inject = ['$scope'];
 
             function ctrl1($scope){
                 var vm = this;
 
-                vm.name = "morteza";
                 vm.submit = submit;
 
                 function submit(){
@@ -38,9 +42,9 @@
                 vm.rules = {
                     ctrl1__name: {
                         required: true,//{
-                        //    required : true,
-                        //    failedMessage: "این فیلد الزامی است"
-                        //},
+                            //    required : true,
+                            //    failedMessage: "این فیلد الزامی است"
+                            //},
                         minLength:{
                             minLength: 3,
                             failedMessage: "این فیدل باید حداقل ۳ کاراکتر باشد",
