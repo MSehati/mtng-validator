@@ -65,9 +65,9 @@
             else if(typeof(rules) === 'object')
                 angular.forEach(rules, forEach);
 
-            scope.$watch(function(){ return Object.keys(ngModel.$error).length;}, toggleValidationMessages);
+            scope.$watch(function(){ return ngModel.$viewValue;}, toggleValidationMessages);
 
-            scope.$watch(function(){ return ngModel.$modelValue;}, function(newValue, oldValue){
+            scope.$watch(function(){ return ngModel.$viewValue;}, function(newValue, oldValue){
                 console.log(newValue + '<----' + oldValue);
             });
 
@@ -136,7 +136,7 @@
                 for (var i = 0; i < keys.length; i++){
                     if(ngModel.$error[keys[i]]){
                         if(errorPane.find('.' + keys[i]).length == 0)
-                            errorPane.append('<span class="'+ keys[i] + '"> '+ provider.messages[keys[i] + '_failed'] + '</span>');
+                            errorPane.append('<span class="'+ keys[i] + ' bg-danger"> '+ provider.messages[keys[i] + '_failed'] + '</span>');
                     }
                 }
             }
