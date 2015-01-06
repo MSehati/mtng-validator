@@ -24,6 +24,7 @@
          * @memberOf mtng.validator.directives.mtngValidator
          */
         function link(scope, element, attrs, ngModel){
+            scope.ctrl1_form.$invalid = true;
             // get the controller of the element
             var ctl = element.controller();
             if (! ctl.rules){
