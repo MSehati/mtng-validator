@@ -103,7 +103,7 @@
              */
             function minLength(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 return modelValue.length >= rules.minLength;
             }
@@ -117,7 +117,7 @@
              */
             function maxLength(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 return modelValue.length <= rules.maxLength;
             }
@@ -159,7 +159,7 @@
              */
             function pattern(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 return rules.pattern.test(modelValue);
             }
@@ -173,7 +173,7 @@
              */
             function email(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 var pattern = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@" +
                     "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
@@ -190,7 +190,7 @@
              */
             function digit(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 var pattern = /^\d+$/g;
 
@@ -206,7 +206,7 @@
              */
             function number(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 var pattern = /^\d+(\.\d+)?$/;
 
@@ -236,6 +236,9 @@
         var Validator = {
             link: link,
             require: 'ngModel',
+            scope:{
+                mtngValidator: "="
+            }
         };
 
         /*
@@ -267,6 +270,8 @@
 
             var provider = new MTNGValidatorsProvider();
 
+            var showMessageCondition = scope.mtngValidator;
+
 
             
             if(typeof(rules) === 'string'){
@@ -286,11 +291,11 @@
             else if(typeof(rules) === 'object')
                 angular.forEach(rules, forEach);
 
-            scope.$watch(function(){ return ngModel.$viewValue;}, toggleValidationMessages);
+            scope.$watch(function(){ return ngModel.$modelValue + ngModel.$viewValue + ngModel.$dirty.toString() + ngModel.$touched.toString() + ngModel.$valid.toString();}, toggleValidationMessages);
 
-            scope.$watch(function(){ return ngModel.$viewValue;}, function(newValue, oldValue){
-                console.log(newValue + '<----' + oldValue);
-            });
+//            scope.$watch(function(){ return ngModel.$viewValue;}, function(newValue, oldValue){
+//                console.log(newValue + '<----' + oldValue);
+//            });
 
             /*
              * @name forEach
@@ -347,6 +352,10 @@
              * @memberOf mtng.validator.directives.mtngValidator
              */
             function toggleValidationMessages(newValue, oldValue){
+                if(!checkMessageCondition()){
+                    return;
+                }
+
                 var keys = Object.keys(ngModel.$error);
                 var errorPane = angular.element('#' + ngModel.$name + '_error_pane');
                 
@@ -372,6 +381,41 @@
                 var pane = '<div id="' + ngModel.$name + '_error_pane" class="errors"></div>';
 
                 element.after(pane);
+            }
+
+            /*
+             * @name getForm
+             * @desc Find form object of the current scope without it's name
+             * @param {object} scope The scope of the directive
+             * @return {object} The form of the scope
+             * @memberOf mtng.validator.directives.mtngValidator
+             */
+            function getForm(scope){
+                var form = null;
+                angular.forEach(scope.$parent, function(value, key){
+                    if(value.constructor.name == 'FormController')
+                        form = value;
+                });
+
+                return form;
+            }
+
+            /*
+             * @name checkMessageCondition
+             * @desc Check to be allowed to show messages or not
+             * @return {Boolean} Return false if it's not allowed to show messages else true
+             * @memberOf mtng.validator.directives.mtngValidator
+             */
+            function checkMessageCondition(){
+                if(!showMessageCondition || !showMessageCondition.length)
+                    return true;
+
+                var result = false;
+                showMessageCondition.forEach(function(item){
+                    result = ngModel['$' + item] || result;
+                });
+
+                return result;
             }
         }
 

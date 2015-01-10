@@ -60,7 +60,7 @@
              */
             function minLength(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 return modelValue.length >= rules.minLength;
             }
@@ -74,7 +74,7 @@
              */
             function maxLength(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 return modelValue.length <= rules.maxLength;
             }
@@ -116,7 +116,7 @@
              */
             function pattern(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 return rules.pattern.test(modelValue);
             }
@@ -130,7 +130,7 @@
              */
             function email(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 var pattern = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@" +
                     "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
@@ -147,7 +147,7 @@
              */
             function digit(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 var pattern = /^\d+$/g;
 
@@ -163,7 +163,7 @@
              */
             function number(modelValue){
                 if(!modelValue)
-                    return;
+                    return true;
 
                 var pattern = /^\d+(\.\d+)?$/;
 
