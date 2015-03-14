@@ -20,6 +20,7 @@
         provider.pattern = "This field is not valid";
         provider.valid = "This field is valid";
         provider.notValid = "This field is not valid";
+        provider.ip = "Please Enter a valid IP adress.";
 
         return provider; 
     }

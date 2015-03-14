@@ -36,6 +36,7 @@
         provider.pattern = "This field is not valid";
         provider.valid = "This field is valid";
         provider.notValid = "This field is not valid";
+        provider.ip = "Please Enter a valid IP adress.";
 
         return provider; 
     }
@@ -68,6 +69,7 @@
             this.email = email;
             this.number = number;
             this.digit = digit;
+            this.ip = ip;
 
             /*
              * @name addRule
@@ -209,6 +211,22 @@
                     return true;
 
                 var pattern = /^\d+(\.\d+)?$/;
+
+                return pattern.test(modelValue);
+            }
+
+            /*
+             * @name ip
+             * @desc Chech the model value that is valid ip or not
+             * @param {object{ modelValue The value fot validating
+             * @return {Boolean} 'true' if 'modelValue' is a valid ip address else 'false'
+             * memberOf mtng.validator.services.MTNGValidatorsProvider
+             */
+            function ip(modelValue){
+                if(!modelValue)
+                    return true;
+
+                var pattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
                 return pattern.test(modelValue);
             }

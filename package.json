@@ -1,6 +1,6 @@
 {
   "name": "mtng-validator",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A convenient validaotr module for angular",
   "main": "index.js",
   "scripts": {

@@ -20,6 +20,7 @@
         <div class="container-fluid">
             <form name="ctrl1_form" novalidate ng-submit="vm.submit()">
                 <input name="ctrl1__name" id="ctrl1__name" ng-model="vm.name" mtng-validator="['touched', 'dirty']" />
+                <input name="ctrl1__ip" id="ctrl1__ip" ng-model="vm.ip" mtng-validator="['touched', 'dirty']"/>
                 <button type="submit" class="button radius" ng-disabled="ctrl1_form.$invalid " disabled="disabled">Submit</button>
                 {{ctrl1_form}} --- xxxx -- {{ctrl1_form.$invalid}}
 
@@ -72,6 +73,10 @@
 //                            maxLength: 5,
 //                            customValidator: function(value){ if(value) return value.length > 5;}
 //                        }
+                    },
+                    ctrl1__ip: {
+                        required: true,
+                        ip: true
                     }
                 };
 
